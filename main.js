@@ -38,18 +38,18 @@ function generatePoint() {
     var y = randomNum(0, dims)
     if(inCircle[x][y]) {
         points.in++
-        ctx.fillStyle = '#E5000305'
+        ctx.fillStyle = '#E50003'
     } else {
         points.out++
-        ctx.fillStyle = '#0075CE05'
+        ctx.fillStyle = '#0075CE'
     }
-    ctx.fillRect(x, y, 1, 1)
-    var pi = points.in / (points.in + points.out) * 4
-    span.innerText = 'π ≈ ' + pi
     if(calculating) {
         try {
             generatePoint()
         } catch {
+            ctx.fillRect(x, y, 1, 1)
+            var pi = points.in / (points.in + points.out) * 4
+            span.innerText = `n = ${(points.in + points.out)}, π ≈ ${parseFloat(pi.toFixed(8))}`
             requestAnimationFrame(generatePoint)
         }
     }
