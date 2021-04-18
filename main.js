@@ -5,23 +5,23 @@ const span = document.getElementById('result')
 const stop = document.getElementById('stop')
 
 ctx.arc(dims, dims, dims, 0, Math.PI * 2);
-ctx.fillStyle = "black";
+ctx.fillStyle = "#EEEEEE";
 ctx.fill();
 
 var calculating = true
 var attemps = 0
+
 const data = localStorage.getItem('data')
 var points = data ? JSON.parse(data) : {
     in: 0,
     out: 0
 }
 
-var inCircle = []
-
 function randomNum(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+var inCircle = []
 function generateLimits() {
     for (let x = 0; x <= dims; x++) {
         for (let y = 0; y <= dims; y++) {
@@ -38,20 +38,18 @@ function generatePoint() {
     var y = randomNum(0, dims)
     if(inCircle[x][y]) {
         points.in++
-        ctx.fillStyle = '#0075CE'
+        ctx.fillStyle = '#E5000305'
     } else {
         points.out++
-        ctx.fillStyle = '#E50003'
+        ctx.fillStyle = '#0075CE05'
     }
     ctx.fillRect(x, y, 1, 1)
     var pi = points.in / (points.in + points.out) * 4
-    span.innerText = 'Pi = ' + pi
+    span.innerText = 'π ≈ ' + pi
     if(calculating) {
-        attemps++
-        if(attemps < 1000) {
+        try {
             generatePoint()
-        } else {
-            attemps = 0
+        } catch {
             requestAnimationFrame(generatePoint)
         }
     }
