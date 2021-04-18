@@ -9,6 +9,7 @@ ctx.fillStyle = "black";
 ctx.fill();
 
 var calculating = true
+var attemps = 0
 const data = localStorage.getItem('data')
 var points = data ? JSON.parse(data) : {
     in: 0,
@@ -37,16 +38,22 @@ function generatePoint() {
     var y = randomNum(0, dims)
     if(inCircle[x][y]) {
         points.in++
-        ctx.fillStyle = '#00FF00'
+        ctx.fillStyle = '#0075CE'
     } else {
         points.out++
-        ctx.fillStyle = '#FF0000'
+        ctx.fillStyle = '#E50003'
     }
     ctx.fillRect(x, y, 1, 1)
     var pi = points.in / (points.in + points.out) * 4
     span.innerText = 'Pi = ' + pi
     if(calculating) {
-        requestAnimationFrame(generatePoint)
+        attemps++
+        if(attemps < 1000) {
+            generatePoint()
+        } else {
+            attemps = 0
+            requestAnimationFrame(generatePoint)
+        }
     }
 }
 
