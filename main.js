@@ -49,7 +49,9 @@ function generatePoint() {
         } catch {
             ctx.fillRect(x, y, 1, 1)
             var pi = points.in / (points.in + points.out) * 4
-            span.innerText = `n = ${(points.in + points.out)}, π ≈ ${parseFloat(pi.toFixed(8))}`
+            span.innerHTML = `
+                <var>n</var> = <var>${Math.round((points.in + points.out) / 1e6)}</var>×<var>10<sup>6</sup></var>,
+                <var>π</var> ≈ <var>${parseFloat(pi.toFixed(8))}</var>`
             requestAnimationFrame(generatePoint)
         }
     }
