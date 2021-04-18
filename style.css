@@ -1,0 +1,14 @@
+#canvas {
+    border: 1px solid black;
+}
+
+#result {
+    font-variant-numeric: tabular-nums;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+}
+
+#stop {
+    display: block;
+}
